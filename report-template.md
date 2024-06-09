@@ -2,26 +2,31 @@
 
 ## Overview of the Analysis
 
-In this section, describe the analysis you completed for the machine learning models used in this Challenge. This might include:
+- Lending companies provide loans or properties to borrowers with the expectation of repayment. Credit risk arises when borrowers fail to repay, causing financial losses for lenders. To assess this risk, machine learning can be used to analyze historical lending data from a peer-to-peer lending service. The goal is to build a model that identifies the creditworthiness of borrowers.
 
-* Explain the purpose of the analysis.
-* Explain what financial information the data was on, and what you needed to predict.
-* Provide basic information about the variables you were trying to predict (e.g., `value_counts`).
-* Describe the stages of the machine learning process you went through as part of this analysis.
-* Briefly touch on any methods you used (e.g., `LogisticRegression`, or any other algorithms).
+- In this analysis, a Logistic Regression model was developed to classify loans as either low-risk (healthy) or high-risk (non-healthy) based on their status. The model achieved a 99% accuracy score. However, the recall value for predicting non-healthy loans was 0.91, compared to 0.99 for healthy loans, indicating a better performance in predicting healthy loans. This disparity is attributed to the imbalanced dataset, with a majority of data points classified as healthy loans.
+
+- Out of the 18,765 loan status's that are healthy/low-risk the model predicted 18,663 as healthy correctly and 102 as healthy incorrectly.
+
+- Out of the 619 loan status's that are non-healthy/high-risk, the model predicted 563 as non-healthy correctly and 56 as non-healthy incorrectly.
 
 ## Results
 
-Using bulleted lists, describe the accuracy scores and the precision and recall scores of all machine learning models.
+- Overall all the model generated an accuracy score of 99%, but much of that was due to an imbalance in the data
 
-* Machine Learning Model 1:
-    * Description of Model 1 Accuracy, Precision, and Recall scores.
+- With the imbalance in data the model is more likely to make the following mistakes:
+o Classifying a non-healthy (high-risk) loan as a healthy (low-risk) loan.
+o Classifying a healthy (low-risk) loan as a non-healthy (high-risk) loan.
+
+- According to the recall score for the model, the model made mistakes 1% of the time when predicting healthy loans but made mistakes 9% of the time when predicting non-healthy loans.
+- In terms of precision, the model had a 100% precision when predicting healthy/low-risk loans, but that was not the case when it came to predicting non-healthy/high-risk loans, where the model had an 85% precision
 
 ## Summary
 
-Summarize the results of the machine learning models, and include a recommendation on the model to use, if any. For example:
+A lending company needs a model that accurately classifies healthy and non-healthy loans to avoid costly mistakes:
 
-* Which one seems to perform best? How do you know it performs best?
-* Does performance depend on the problem we are trying to solve? (For example, is it more important to predict the `1`'s, or predict the `0`'s? )
+- Misclassifying healthy loans as non-healthy can result in losing customers.
+- Misclassifying non-healthy loans as healthy can result in financial losses.
+While the model performed well predicting the healthy loans, it did not have the same level of success predicting non-healthy loans, and the sample size just isn’t sufficient to show that it can be successful doing so in the future.
 
-If you do not recommend any of the models, please justify your reasoning.
+With that being the case, I would recommend the lending company use the model to quickly decipher if a loan candidate would be a low-risk client, but they should do further evaluations when the model predicts a client maybe high risk, and not simply take what the model says as truth.
